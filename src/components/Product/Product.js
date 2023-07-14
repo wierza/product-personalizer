@@ -12,6 +12,10 @@ const Product = props => {
   const prepareColorClassName = color => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
   }
+  const getPrice = () => {
+    const additionalPrice = sizes.find(size => size.name === currentSize).additionalPrice;
+    return basePrice + additionalPrice;
+  };
 
   return (
     <article className={styles.product}>
@@ -24,7 +28,7 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{title}</h2>
-          <span className={styles.price}>{basePrice}$</span>
+          <span className={styles.price}>{getPrice()}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
