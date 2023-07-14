@@ -17,6 +17,18 @@ const Product = props => {
     return basePrice + additionalPrice;
   };
 
+  const addToCart = event => {
+    event.preventDefault();
+    const summary = {
+      Name: title,
+      Size: currentSize,
+      Price: getPrice(),
+      Color: currentColor,
+    }
+
+    console.log('Product Summary:', summary);
+  };
+
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -30,7 +42,7 @@ const Product = props => {
           <h2 className={styles.name}>{title}</h2>
           <span className={styles.price}>{getPrice()}$</span>
         </header>
-        <form>
+        <form onSubmit={addToCart}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
@@ -71,6 +83,7 @@ const Product = props => {
 };
 
 Product.propTypes = {
+  name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   basePrice: PropTypes.number.isRequired,
   colors: PropTypes.array.isRequired,
